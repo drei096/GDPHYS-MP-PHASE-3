@@ -2,7 +2,7 @@
 
 CircleRB::CircleRB()
 {
-	this->ParticleType = 1;
+	//this->ParticleType = 1;
 }
 
 void CircleRB::addForceAtPoint(PhysVector point, PhysVector f)

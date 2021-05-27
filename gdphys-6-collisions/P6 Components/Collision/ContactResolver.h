@@ -14,7 +14,5 @@ public:
 protected:
 	unsigned current_iterations = 0;
 
-private:
-	void sortSeparatingSpeeds(vector<ParticleContact*> contacts);
 };
 

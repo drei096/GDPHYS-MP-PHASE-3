@@ -4,7 +4,8 @@
 void PhysicsWorld::addParticle(PhysParticle* particle)
 {
 	particles.push_back(particle);
-	//registry.add(particle, &Gravity);
+	//uncomment if need to apply gravity to particles
+	//registry.add(particle, &Gravity); 
 }
 
 void PhysicsWorld::update(float time)
@@ -14,9 +15,11 @@ void PhysicsWorld::update(float time)
 
 	for (list<PhysParticle*>::iterator i = particles.begin(); i != particles.end(); i++)
 	{
-		//(*i)->acceleration = gravity;
+		//uncomment if need to apply gravity
+		//(*i)->acceleration = gravity; 
 		(*i)->update(time);
 
+		//if current updating particle is rectprism, apply this to update edge positions
 		if ((*i)->ParticleType == 3)
 		{
 			RectPrism* rect = dynamic_cast<RectPrism*>(*i);
@@ -80,14 +83,14 @@ void PhysicsWorld::getOverlaps()
 		{
 			list<PhysParticle*>::iterator b = next(particles.begin(), h);
 
-			//0 = Particle, 1 = RB, 2= Circle, 3 = Rect
+			//0 = Particle, 2= Circle, 3 = Rect
 			if ((*a)->getParticleType() == 0 && (*b)->getParticleType() == 0)
 			{
-				generateParticleContacts(*a, *b);
+				generateParticleContacts(*a, *b); //particle contact resolution
 			}
 			else
 			{
-				generateRigidbodyContacts(*a, *b);
+				generateRigidbodyContacts(*a, *b); //rigidbody contact resolution
 			}
 		}
 	}
@@ -115,12 +118,14 @@ void PhysicsWorld::generateParticleContacts(PhysParticle* a, PhysParticle* b)
 
 void PhysicsWorld::generateRigidbodyContacts(PhysParticle* a, PhysParticle* b)
 {
+	//if particles are both particle/circle
 	if (a->getParticleType() == 2 && b->getParticleType() == 2 ||
 		a->getParticleType() == 2 && b->getParticleType() == 0 ||
 		a->getParticleType() == 0 && b->getParticleType() == 2)
 	{
 		generateParticleContacts(a, b);
 	}
+	//if particles are both rects
 	else if (a->getParticleType() == 3 && b->getParticleType() == 3)
 	{
 		RectPrism* rect1 = dynamic_cast<RectPrism*>(a);
@@ -128,17 +133,18 @@ void PhysicsWorld::generateRigidbodyContacts(PhysParticle* a, PhysParticle* b)
 
 		processRigidBodyContact1(rect1, rect2);
 	}
+	//if mixed
 	else
 	{
 		RectPrism* rect = dynamic_cast<RectPrism*>(a);
 		if (rect == nullptr)
 		{
 			rect = dynamic_cast<RectPrism*>(b);
-			processRigidBodyContact2(rect, a);
+			processRigidBodyContact2(rect, a); //a is a particle/circle
 		}
 		else
 		{
-			processRigidBodyContact2(rect, b);
+			processRigidBodyContact2(rect, b); //b is a particle/circle
 		}
 	}
 }
@@ -202,7 +208,7 @@ void PhysicsWorld::processRigidBodyContact1(RectPrism* a, RectPrism* b)
 			}
 		}
 	}
-
+	//the for loop fails to exit since a collision is detected
 	if (ret)
 	{
 		PhysVector dir = a->position - b->position;
@@ -252,6 +258,7 @@ void PhysicsWorld::processRigidBodyContact2(RectPrism* a, PhysParticle* b)
 
 	bool col = (D_X * D_X + D_Y * D_Y) <= (b->radius * b->radius);
 
+	//collision is detected
 	if (col)
 	{
 		PhysVector dir = a->position - b->position;

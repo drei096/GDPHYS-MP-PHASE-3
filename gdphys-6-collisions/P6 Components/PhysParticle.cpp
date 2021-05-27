@@ -19,7 +19,7 @@ void PhysParticle::update(float time)
 void PhysParticle::updatePos(float time)
 {
 	position = position + (velocity * time) + ((acceleration * powf(time, 2)) * (1 / 2));
-	//compute rotation similar to above, but w/o acc
+	//compute rotation similar to above, but w/o acceleration
 	rotation = rotation + angularVelocity * time;
 }
 
@@ -32,6 +32,7 @@ void PhysParticle::updateVelocity(float time)
 	//velocity with damping
 	velocity = velocity * powf(damping, time);
 
+	//torque and angular vel calculation
 	float mI = momentOfInertia();
 	angularVelocity = angularVelocity + (-accumulatedTorque) * ((float)1 / mI) * time;
 	angularVelocity = angularVelocity * powf(angularDamping, time);
@@ -81,6 +82,7 @@ PhysVector PhysParticle::toRenderPoint()
 
 void PhysParticle::addForceAtPoint(PhysVector point, PhysVector f)
 {
+	//MOVED TO CIRCLERB AND RECTPRISM
 	/*
 	accumulatedForce = accumulatedForce + f;
 	accumulatedTorque = accumulatedTorque + PhysVector::crossProductF(point, f);

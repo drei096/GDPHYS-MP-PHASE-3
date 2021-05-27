@@ -85,6 +85,11 @@ float PhysVector::getDistanceBetweenPoints(PhysVector a, PhysVector b)
 	return sqrt(((b.x - a.x) * (b.x - a.x)) + ((b.y - a.y) * (b.y - a.y)));
 }
 
+float PhysVector::crossProductF(PhysVector a, PhysVector b)
+{
+	return (a.x * b.y) - (a.y * b.x);
+}
+
 void PhysVector::normalize()
 {
 	//PhysVector result = PhysVector(0, 0);

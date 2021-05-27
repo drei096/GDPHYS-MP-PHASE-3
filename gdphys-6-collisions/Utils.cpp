@@ -21,6 +21,7 @@ void Utils::displayStats(vector<PhysParticle> orderedFinish, int totalUpdateCall
 
 }
 
+/*
 void Utils::displayDistanceTravelled(PhysParticle p)
 {
 	PhysVector result = PhysVector(0, 0);
@@ -28,11 +29,22 @@ void Utils::displayDistanceTravelled(PhysParticle p)
 	result = result + (p.position - p.initialPos);
 	cout << result.x << "m" << endl;
 }
-
+*/
 PhysVector Utils::p6ToSFMLPoint(PhysVector v)
 {
 	PhysVector ret = PhysVector(v.x, -v.y);
 	return ret + offset;
+}
+
+PhysVector Utils::rotatePoint(PhysVector v, float a)
+{
+	PhysVector ret = PhysVector(0, 0);
+	float rad = a;
+
+	ret.x = v.x * cos(rad) + v.y * sin(rad);
+	ret.y = -v.x * sin(rad) + v.y * cos(rad);
+
+	return ret;
 }
 
 

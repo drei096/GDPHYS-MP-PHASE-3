@@ -9,8 +9,9 @@ class Utils
 {
 public:
 	void displayStats(vector<PhysParticle> orderedFinish, int totalUpdateCalls);
-	void displayDistanceTravelled(PhysParticle p);
+	//void displayDistanceTravelled(PhysParticle p);
 	static PhysVector p6ToSFMLPoint(PhysVector v);
+	static PhysVector rotatePoint(PhysVector v, float a);
 
 public:
 	static PhysVector offset;

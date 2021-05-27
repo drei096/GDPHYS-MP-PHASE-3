@@ -60,6 +60,15 @@
     <ClCompile Include="P6 Components\Links\Rod.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="P6 Components\RenderParticle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="P6 Components\Rigidbodies\CircleRB.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="P6 Components\Rigidbodies\RectPrism.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="P6 Components\PhysicsWorld.h">
@@ -102,6 +111,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="P6 Components\Links\Rod.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="P6 Components\RenderParticle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="P6 Components\Rigidbodies\CircleRB.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="P6 Components\Rigidbodies\RectPrism.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

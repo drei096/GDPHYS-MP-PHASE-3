@@ -7,6 +7,10 @@
 #include "Collision/ContactResolver.h"
 #include <vector>
 #include "Links/ParticleLink.h"
+#include "Rigidbodies/CircleRB.h"
+#include "Rigidbodies/RectPrism.h"
+#include "../Utils.h"
+
 
 using namespace std;
 
@@ -34,5 +38,14 @@ protected:
 
 	void generateContacts();
 	void getOverlaps();
+
+	//generating contacts for both particles
+	void generateParticleContacts(PhysParticle* a, PhysParticle* b);
+	//generating contacts if 1 or both are RB's
+	void generateRigidbodyContacts(PhysParticle* a, PhysParticle* b);
+
+	//processing contacts
+	void processRigidBodyContact1(RectPrism* a, RectPrism* b);
+	void processRigidBodyContact2(RectPrism* a, PhysParticle* b);
 };
 

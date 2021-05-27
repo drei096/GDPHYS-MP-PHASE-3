@@ -1,6 +1,8 @@
 #include "PhysParticle.h"
 #include "../Utils.h"
 #include <iostream>
+#include "Rigidbodies/CircleRB.h"
+#include "Rigidbodies/RectPrism.h"
 using namespace std;
 
 void PhysParticle::update(float time)
@@ -11,13 +13,14 @@ void PhysParticle::update(float time)
 	}
 	updatePos(time);
 	updateVelocity(time);
-	//updateDestroyed();
 	resetForce();
 }
 
 void PhysParticle::updatePos(float time)
 {
 	position = position + (velocity * time) + ((acceleration * powf(time, 2)) * (1 / 2));
+	//compute rotation similar to above, but w/o acc
+	rotation = rotation + angularVelocity * time;
 }
 
 void PhysParticle::updateVelocity(float time)
@@ -29,21 +32,15 @@ void PhysParticle::updateVelocity(float time)
 	//velocity with damping
 	velocity = velocity * powf(damping, time);
 
+	float mI = momentOfInertia();
+	angularVelocity = angularVelocity + (-accumulatedTorque) * ((float)1 / mI) * time;
+	angularVelocity = angularVelocity * powf(angularDamping, time);
+
 	//calculate total velocity over the sim
 	totalVelocity = totalVelocity + velocity;
 }
 
-/*
-void PhysParticle::updateDestroyed()
-{
-	//Change Particle Destructor here after the question mark
-	if (timer.getElapsedTime().asSeconds() >= (rand() % 2 == 0 ? 0.5 : 1))
-	{
-		setIsDestroyed();
-	}
-}
-*/
-
+//DEPRECATED
 float PhysParticle::measureTime()
 {
 	sf::Clock clock;
@@ -69,6 +66,7 @@ void PhysParticle::addForce(PhysVector f)
 void PhysParticle::resetForce()
 {
 	accumulatedForce = PhysVector(0, 0);
+	accumulatedTorque = 0;
 	acceleration = PhysVector(0, 0);
 }
 
@@ -79,6 +77,24 @@ PhysParticle::PhysParticle()
 PhysVector PhysParticle::toRenderPoint()
 {
 	return Utils::p6ToSFMLPoint(position);
+}
+
+void PhysParticle::addForceAtPoint(PhysVector point, PhysVector f)
+{
+	/*
+	accumulatedForce = accumulatedForce + f;
+	accumulatedTorque = accumulatedTorque + PhysVector::crossProductF(point, f);
+	*/
+}
+
+float PhysParticle::momentOfInertia()
+{
+	return ((float)2/5) * mass * (radius * radius);
+}
+
+int PhysParticle::getParticleType()
+{
+	return this->ParticleType;
 }
 
 

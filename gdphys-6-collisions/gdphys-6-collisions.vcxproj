@@ -145,6 +145,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="P6 Components\Rigidbodies\CircleRB.cpp" />
     <ClCompile Include="P6 Components\Collision\ContactResolver.cpp" />
     <ClCompile Include="P6 Components\Springs\BungeeSpring.cpp" />
     <ClCompile Include="P6 Components\Springs\AnchoredSpring.cpp" />
@@ -159,9 +160,12 @@
     <ClCompile Include="P6 Components\Collision\ParticleContact.cpp" />
     <ClCompile Include="P6 Components\Links\ParticleLink.cpp" />
     <ClCompile Include="P6 Components\Links\Rod.cpp" />
+    <ClCompile Include="P6 Components\RenderParticle.cpp" />
+    <ClCompile Include="P6 Components\Rigidbodies\RectPrism.cpp" />
     <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="P6 Components\Rigidbodies\CircleRB.h" />
     <ClInclude Include="P6 Components\Collision\ContactResolver.h" />
     <ClInclude Include="P6 Components\Springs\BungeeSpring.h" />
     <ClInclude Include="P6 Components\Springs\AnchoredSpring.h" />
@@ -175,6 +179,8 @@
     <ClInclude Include="P6 Components\Collision\ParticleContact.h" />
     <ClInclude Include="P6 Components\Links\ParticleLink.h" />
     <ClInclude Include="P6 Components\Links\Rod.h" />
+    <ClInclude Include="P6 Components\RenderParticle.h" />
+    <ClInclude Include="P6 Components\Rigidbodies\RectPrism.h" />
     <ClInclude Include="Utils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

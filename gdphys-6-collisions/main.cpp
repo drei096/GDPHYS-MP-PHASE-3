@@ -324,6 +324,8 @@ int main()
             rect3Shape.setPosition(rect3ShapePos.x, rect3ShapePos.y);
             rect3Shape.setRotation(rect3->rotation);
 
+          
+
             //POLL EVENTS
             window.pollEvent(event);
             if (event.type == sf::Event::Closed)
